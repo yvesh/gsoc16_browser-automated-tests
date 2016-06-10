@@ -5,6 +5,7 @@ Feature: Create an Article
   Background:
     Given I am signed in in the administrator area
     And I am allowed to create an article
+    And There is a category
 
   Scenario: Successfully create an Article
 
