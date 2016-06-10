@@ -23,4 +23,6 @@ class AcceptanceTester extends \Codeception\Actor
    /**
     * Define custom actions here
     */
+
+   protected $timeout = 30;
 }

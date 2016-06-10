@@ -27,7 +27,7 @@ class Article extends \AcceptanceTester
         $I->amOnPage($url);
 
         // We need better selectors
-        $I->waitForText($id ? 'Articles: Edit' : 'Articles: New', '30', ['css' => 'h1']);
+        $I->waitForText($id ? 'Articles: Edit' : 'Articles: New', $this->timeout, ['css' => 'h1']);
 
         return $this;
     }

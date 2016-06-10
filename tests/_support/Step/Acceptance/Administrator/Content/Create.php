@@ -51,6 +51,9 @@ class Create extends \AcceptanceTester
         $I->pageArticles
             ->open()
             ->searchForArticle($this->article['title']);
+
+        $I->expectTo('see the Article in the List of Articles');
+        $I->see($this->article['title']);
     }
 
     /**

@@ -13,20 +13,15 @@ class Articles extends \AcceptanceTester
         $this->amOnPage('administrator/index.php?option=com_content&view=articles');
 
         // We need better selectors
-        $this->waitForText('Articles', '30', ['css' => 'h1']);
+        $this->waitForText('Articles', $this->timeout, ['css' => 'h1']);
 
         return $this;
     }
 
     public function searchForArticle($title)
     {
-        $I = $this;
-
         // TODO Add search etc.
         // ...
-
-        $I->expectTo('see the Article in the List of Articles');
-        $I->see($title, $I->selectors['list']);
 
         return $this;
     }
