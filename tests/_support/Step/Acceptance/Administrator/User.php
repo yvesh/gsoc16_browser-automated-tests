@@ -20,4 +20,16 @@ class User extends \AcceptanceTester
 		$I = $this;
 		$I->comment('@todo');
 	}
+
+	/**
+	 * @Given I am signed in in the administrator area
+	 */
+	public function iAmSignedInInTheAdministratorArea()
+	{
+		$I = $this;
+		$I->amOnPage('administrator/');
+		$I->fillField(['css' => 'input[data-tests="username"]'], 'admin');
+		$I->fillField(['css' => 'input[data-tests="password"]'], 'admin');
+		$I->click(['css' => 'button[data-tests="log in"]']);
+	}
 }
