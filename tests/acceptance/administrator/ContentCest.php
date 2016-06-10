@@ -37,7 +37,7 @@ class ContentCest
 
 		$I->amGoingTo('try to save an article with a filled title and description');
 
-		$I->fillField('jform_title', $this->title);
+		$I->fillField(['id' => 'jform_title'], $this->title);
 
 		// Iframe editor
 		$I->switchToIFrame("jform_articletext_ifr");
