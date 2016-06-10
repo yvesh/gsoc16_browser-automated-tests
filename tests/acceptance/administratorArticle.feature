@@ -4,7 +4,8 @@ Feature: Administrator articles
   I need to be able to create, edit, publish and delete articles
 
   Background:
-    Given I am logged in the backend as a user with the "super administrator" role
+    Given I am logged as "admin"
+    # ...
 
   Scenario: Admin creates an Article
     Given I am on the Article create site
