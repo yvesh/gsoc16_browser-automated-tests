@@ -5,7 +5,7 @@ namespace Page\Acceptance\Administrator\Content;
 class Article extends \AcceptanceTester
 {
     protected $selectors = [
-        'title' => 'jform_title',
+        'title' => ['id' => 'jform_title'],
         'text' => 'fillTinyMce',
 
         // For illustration
@@ -36,8 +36,9 @@ class Article extends \AcceptanceTester
     {
         $I = $this;
 
-        foreach ($fields as $key => $value) {
-            $selector = strtolower($I->selectors[$key]);
+        foreach ($fields as $key => $value)
+        {
+            $selector = $this->selectors[strtolower($key)];
 
             // Check if we have a complex locator
             if (method_exists($this, $selector))

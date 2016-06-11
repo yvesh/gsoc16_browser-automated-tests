@@ -9,7 +9,7 @@ Feature: Create an Article
 
   Scenario: Successfully create an Article
 
-    # Even that could be I create an article with the title "a" and text "b"
+    # That also could be: I create an article with the title "a" and text "b"
     # or Given article
 
     Given the following article details:
