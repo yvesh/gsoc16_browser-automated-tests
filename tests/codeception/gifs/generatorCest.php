@@ -42,11 +42,20 @@ class generatorCest
 	 */
 	public function fieldsGif(GifsTester $I)
 	{
+		// Preparations
 		$I->amOnPage('administrator/');
 		$I->doAdministratorLogin();
 
+		$I->wait(6);
+
+		// Start
+		$I->comment('START');
+		$I->amOnPage('images/start.png');
 		$I->wait(4);
 
+		$I->amOnPage('administrator/');
+
+		$I->wait(2);
 		$I->click('Content');
 		$I->wait(1);
 		$I->click('a[href="index.php?option=com_fields&context=com_content.article"]');
@@ -61,6 +70,9 @@ class generatorCest
 		$I->wait(1);
 		$I->click('.btn-success');
 
+		$I->comment('END');
+
+		// End
 		$I->wait(4);
 	}
 }
