@@ -35,18 +35,23 @@ class generatorCest
 		$I->disableStatistics();
 	}
 
+	/**
+	 * Custom fields
+	 *
+	 * @param GifsTester $I
+	 */
 	public function fieldsGif(GifsTester $I)
 	{
 		$I->amOnPage('administrator/');
 		$I->doAdministratorLogin();
 
 		$I->wait(4);
+
 		$I->click('Content');
 		$I->wait(1);
 		$I->click('a[href="index.php?option=com_fields&context=com_content.article"]');
 		$I->wait(2);
 		$I->click('.btn-success');
-		// \Codeception\Util\Locator::find('a', array('Joomla.submitbutton(\'field.add\')'));
 		$I->wait(2);
 		$I->fillField('#jform_title', 'Custom Fields');
 		$I->wait(1);
@@ -56,8 +61,6 @@ class generatorCest
 		$I->wait(1);
 		$I->click('.btn-success');
 
-
 		$I->wait(4);
 	}
 }
-

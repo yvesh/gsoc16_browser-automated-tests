@@ -20,5 +20,4 @@ namespace Helper;
  */
 class Gifs extends \Codeception\Module
 {
-
 }
