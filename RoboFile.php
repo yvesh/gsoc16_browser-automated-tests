@@ -627,6 +627,80 @@ class RoboFile extends \Robo\Tasks
 	}
 
 	/**
+	 * Create gifs
+	 *
+	 * @param array $opts
+	 */
+	public function createGifs($opts = ['new' => true, 'env' => 'desktop'])
+	{
+		$this->say("Running Animated Gif creator");
+
+		$this->createGifSite($opts['new']);
+
+		$this->runSelenium();
+
+		// Make sure to run the build command to generate AcceptanceTester
+		$this->_exec('php ' . $this->testsPath . 'vendor/bin/codecept build');
+		$pathToCodeception = $this->testsPath . 'vendor/bin/codecept';
+
+		$this->taskCodecept($pathToCodeception)
+			->arg('--steps')
+			->arg('--debug')
+			->arg('--fail-fast')
+			->arg('--env ' . $opts['env'])
+			->arg($this->testsPath . 'gifs/')
+			->run()
+			->stopOnFail();
+	}
+
+	/**
+	 * Create the gif sites
+	 *
+	 * @return string
+	 */
+	private function createGifSite($new = true)
+	{
+		// Caching cloned installations locally
+		$this->say('Creating tests/codeception/joomla-gifs site');
+
+		if (!$new)
+		{
+			return;
+		}
+
+		if (!is_dir('tests/codeception/snapcache') || (time() - filemtime('tests/codeception/snapcache') > 60 * 60 * 24))
+		{
+			if (file_exists('tests/codeception/snapcache'))
+			{
+				$this->taskDeleteDir('tests/codeception/snapcache')->run();
+			}
+
+			$branch = empty($this->configuration->branch) ? 'staging' : $this->configuration->branch;
+			$this->_exec("git clone -b $branch --single-branch --depth 1 https://github.com/joomla/joomla-cms.git tests/codeception/snapcache");
+		}
+
+		$snapshotInstallationDir = "tests/codeception/joomla-gifs";
+
+		// Get Joomla Clean Testing sites
+		if (is_dir($snapshotInstallationDir))
+		{
+			try
+			{
+				$this->taskDeleteDir($snapshotInstallationDir)->run();
+			}
+			catch (Exception $e)
+			{
+				// Sorry, we tried :(
+				$this->say('Sorry, you will have to delete ' . $snapshotInstallationDir . ' manually. ');
+				exit(1);
+			}
+		}
+
+		$this->_copyDir('tests/codeception/snapcache', $snapshotInstallationDir);
+		$this->say('Joomla snapshot site created at ' . $snapshotInstallationDir);
+	}
+
+	/**
 	 * Get the suite configuration
 	 *
 	 * @param string $suite

@@ -152,3 +152,7 @@ composer.phar
 # Build related
 RoboFile.ini
 
+#Gif related
+tests/codeception/gifs.suite.yml
+tests/codeception/snapcache
+tests/codeception/joomla-gifs
