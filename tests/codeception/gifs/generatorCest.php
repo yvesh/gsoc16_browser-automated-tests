@@ -19,6 +19,11 @@ class generatorCest
 	{
 	}
 
+	const SHORT = 1;
+	const NORMAL = 2;
+	const LONG = 4;
+	const START = 6;
+
 	/**
 	 * Install Joomla staging
 	 *
@@ -46,33 +51,58 @@ class generatorCest
 		$I->amOnPage('administrator/');
 		$I->doAdministratorLogin();
 
-		$I->wait(6);
+		$I->wait(self::START);
 
 		// Start
 		$I->comment('START');
-		$I->amOnPage('images/start.png');
-		$I->wait(4);
+		$I->amOnPage('images/custom-fields.png');
+		$I->wait(self::LONG);
 
 		$I->amOnPage('administrator/');
 
-		$I->wait(2);
+		$I->wait(self::NORMAL);
 		$I->click('Content');
-		$I->wait(1);
+		$I->wait(self::NORMAL);
 		$I->click('a[href="index.php?option=com_fields&context=com_content.article"]');
-		$I->wait(2);
+		$I->wait(self::NORMAL);
 		$I->click('.btn-success');
-		$I->wait(2);
-		$I->fillField('#jform_title', 'Custom Fields');
-		$I->wait(1);
-		$I->fillField('#jform_label', '3.7');
-		$I->wait(1);
-		$I->fillField('#jform_default_value', 'is here!');
-		$I->wait(1);
+		$I->wait(self::NORMAL);
+		$I->fillField('#jform_title', 'Custom Text Field');
+		$I->wait(self::SHORT);
+		$I->fillField('#jform_label', 'Joomla! 3.7');
+		$I->wait(self::SHORT);
 		$I->click('.btn-success');
+		$I->wait(self::NORMAL);
+
+		$I->amOnPage('administrator/index.php?option=com_content&view=article&layout=edit');
+		$I->wait(self::NORMAL);
+
+		$I->fillField('#jform_title', 'Article with Custom field');
+		$I->wait(self::NORMAL);
+
+
+		$I->scrollTo(['css' => 'div.toggle-editor']);
+		$I->click('Toggle editor');
+		$I->fillField('#jform_articletext', 'A sample article');
+		$I->wait(self::NORMAL);
+
+		$I->executeJS('window.scrollTo(0,0);');
+		$I->wait(self::SHORT);
+
+		$I->click('a[href="#attrib-fields-0"]');
+		$I->wait(self::NORMAL);
+
+		$I->fillField('#jform_params_custom_text_field', 'Joomla');
+		$I->wait(self::NORMAL);
+
+		$I->click('.btn-success');
+
+		$I->wait(3);
+		$I->amOnPage('images/custom-fields-thankyou.png');
 
 		$I->comment('END');
 
 		// End
-		$I->wait(4);
+		$I->wait(10);
 	}
 }
