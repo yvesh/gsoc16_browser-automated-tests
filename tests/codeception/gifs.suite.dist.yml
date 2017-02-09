@@ -11,7 +11,7 @@ modules:
         JoomlaBrowser:
             url: 'http://gsoc16:8080/tests/codeception/joomla-gifs'     # the url that points to the joomla installation at /tests/system/joomla-snapshots
             browser: 'chrome'
-            window_size: 1024x768
+            window_size: 1247x950
             capabilities:
               unexpectedAlertBehaviour: 'accept'
             username: 'admin'                      # UserName for the Administrator
