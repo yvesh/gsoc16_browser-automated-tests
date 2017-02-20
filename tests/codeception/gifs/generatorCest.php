@@ -22,7 +22,7 @@ class generatorCest
 	const SHORT = 1;
 	const NORMAL = 2;
 	const LONG = 4;
-	const START = 6;
+	const START = 30;
 
 	/**
 	 * Install Joomla staging
@@ -31,6 +31,7 @@ class generatorCest
 	 */
 	public function installationScreenshots(GifsTester $I)
 	{
+		// Only run first time @todo split
 		return;
 
 		$I->comment('I open Joomla Installation Configuration Page');
@@ -51,11 +52,17 @@ class generatorCest
 		$I->amOnPage('administrator/');
 		$I->doAdministratorLogin();
 
+		$I->amOnPage('images/fields-start.jpg');
 		$I->wait(self::START);
+
+		$I->comment('START in 10 seconds');
+		$I->wait(8);
+		$I->comment('START in 2 seconds');
+		$I->wait(2);
 
 		// Start
 		$I->comment('START');
-		$I->amOnPage('images/custom-fields.png');
+		$I->amOnPage('images/fields-start.jpg');
 		$I->wait(self::LONG);
 
 		$I->amOnPage('administrator/');
@@ -98,7 +105,7 @@ class generatorCest
 		$I->click('.btn-success');
 
 		$I->wait(3);
-		$I->amOnPage('images/custom-fields-thankyou.png');
+		$I->amOnPage('images/fields-end.jpg');
 
 		$I->comment('END');
 

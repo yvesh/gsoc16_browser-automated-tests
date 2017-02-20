@@ -9,7 +9,7 @@ modules:
         - JoomlaBrowser
     config:
         JoomlaBrowser:
-            url: 'http://gsoc16:8080/tests/codeception/joomla-gifs'     # the url that points to the joomla installation at /tests/system/joomla-snapshots
+            url: 'http://gsoc16/tests/codeception/joomla-gifs'     # the url that points to the joomla installation at /tests/system/joomla-snapshots
             browser: 'chrome'
             window_size: 1247x950
             capabilities:
@@ -27,5 +27,5 @@ modules:
             admin email: 'admin@mydomain.com'      # email Id of the Admin
             language: 'English (United Kingdom)'   # Language in which you want the Application to be Installed
         AcceptanceHelper:
-            url: 'http://gsoc16:8080/tests/codeception/joomla-gifs' # the url that points to the joomla installation at /tests/system/joomla-cms - we need it twice here
+            url: 'http://gsoc16/tests/codeception/joomla-gifs' # the url that points to the joomla installation at /tests/system/joomla-cms - we need it twice here
 error_level: "E_ALL & ~E_STRICT & ~E_DEPRECATED"
